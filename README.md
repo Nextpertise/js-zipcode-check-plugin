@@ -3,7 +3,7 @@ There are two modes of rending the zipcheck:
 
 ## Installation
 Include the script in your page
-`<script src="/dist/js/app.js"></script>`
+`<script src="https://cdn.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/js/app.js"></script>`
 
 
 ## Minified
