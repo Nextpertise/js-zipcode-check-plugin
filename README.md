@@ -5,8 +5,11 @@ There are two modes of rending the zipcheck:
 Include the script in your page
 `<script src="https://cdn.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/js/app.js"></script>`
 
+## Full
+In full mode, the zipcheck will display both the address lookup form, and the results page. Furthermore, the user will not be redirected, but both compoments will communicate without the page refreshing
 
-## Minified
+
+## Address form only
 The zipcheck will only display the address lookup, and redirect the user to a different page to where the full zipcheck will be implementen. To enable the stand-alone mode, you simply have to provide the URL to the page the form needs to redirect to, by using the `redirect` prop.
 
 ```
@@ -15,8 +18,6 @@ The zipcheck will only display the address lookup, and redirect the user to a di
  ></nextpertise-zipcheck>
 ```
 
-## Full
-In full mode, the zipcheck will display both the address lookup form, and the results page. Furthermore, the user will not be redirected, but both compoments will communicate without the page refreshing
 
 # Passing properties from a custom form / using a custom form
 You can also choose to implemenent a custom form on, though we can't give support, we can give a little support on how-to do so.
