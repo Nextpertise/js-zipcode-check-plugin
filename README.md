@@ -1,6 +1,11 @@
 # Rendering the zipcheck 
 There are two modes of rending the zipcheck:
 
+## Installation
+Include the script in your page
+<script src="/dist/js/app.js"></script>
+
+
 ## Minified
 The zipcheck will only display the address lookup, and redirect the user to a different page to where the full zipcheck will be implementen. To enable the stand-alone mode, you simply have to provide the URL to the page the form needs to redirect to, by using the `redirect` prop.
 
