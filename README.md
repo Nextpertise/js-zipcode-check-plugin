@@ -3,7 +3,7 @@ There are two modes of rending the zipcheck:
 
 ## Installation
 Include the script in your page
-<script src="/dist/js/app.js"></script>
+`<script src="/dist/js/app.js"></script>`
 
 
 ## Minified
