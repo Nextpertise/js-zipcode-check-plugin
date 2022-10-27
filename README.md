@@ -3,7 +3,7 @@ There are two modes of rending the zipcheck:
 
 ## Installation
 Include the script in your page
-`<script src="https://cdn.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/js/app.js"></script>`
+`<script src="https://cdn.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin@main/dist/js/app.js"></script>`
 
 ## Full
 In full mode, the zipcheck will display both the address lookup form, and the results page. Furthermore, the user will not be redirected, but both compoments will communicate without the page refreshing
