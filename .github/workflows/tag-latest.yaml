@@ -1,7 +1,7 @@
 name: Add latest tag to new release
 on:
-  release:
-    types: [main]
+  push:
+    branches: [main]
 
 jobs:
   run:
