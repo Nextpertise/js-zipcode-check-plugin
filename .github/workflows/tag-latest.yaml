@@ -20,9 +20,14 @@ jobs:
           incrementPerCommit: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: rickstaa/action-create-tag@v1
+      - name: Determine what the next version should be
+        uses: rickstaa/action-create-tag@v1
         with:
           tag: ${{ steps.versioning.outputs.version }}
           message: "Latest release"
-      - run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/dist/js/app.js
-      - run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/dist/js/app.css
+
+      - name: Purge JS CDN
+        run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/dist/js/app.js
+
+      - name: Purge CSS CDN
+        run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/dist/js/app.css
