@@ -22,3 +22,5 @@ jobs:
           # Force-update a branch instead of using a tag.
           # Default: false
           force-branch: true
+      - run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin@latest/dist/js/app.js
+      - run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin@latest/dist/js/app.css
