@@ -1,26 +1,33 @@
-name: Publish to Public Repo
-
+name: Build and deploy
 on:
   push:
-    branches: [ master ]
+    branches: [main]
 
 jobs:
-  build:
+  my-increment-semver-job:
     runs-on: ubuntu-latest
+    name: A job to test incrementing the version of a repository
     steps:
-      - name: Run latest-tag
-        uses: EndBug/latest-tag@latest
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Auto Increment Semver Action
+        uses: MCKanpolat/auto-semver-action@1.0.5
+        id: versioning
         with:
-          # You can change the name of the tag or branch with this input.
-          # Default: 'latest'
-          ref: latest
+          releaseType: patch
+          incrementPerCommit: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-          # If a description is provided, the action will use it to create an annotated tag. If none is given, the action will create a lightweight tag.
-          # Default: ''
-          description: ''
+      - name: Determine what the next version should be
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{ steps.versioning.outputs.version }}
+          message: "Latest release"
 
-          # Force-update a branch instead of using a tag.
-          # Default: false
-          force-branch: true
-      - run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin@latest/dist/js/app.js
-      - run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin@latest/dist/js/app.css
+      - name: Purge JS CDN
+        run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/dist/js/app.js
+
+      - name: Purge CSS CDN
+        run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin/dist/js/app.css
