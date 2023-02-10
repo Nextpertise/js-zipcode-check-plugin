@@ -1,25 +1,23 @@
-name: Tagging
-
+name: Build and deploy
 on:
   push:
-    branches: [main]
 
 jobs:
-  build:
-    name: Bump tag
+  Tag-and-release:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Create an incremental release
-        uses: aurestic/incrementarl-create-release@master
+      # Checkout the repository
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          flag_branch: true
-          message: Bump version
-          prev_tag: 'v'
-          update_odoo_module_version: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin@latest/dist/js/app.js
-      - run: curl https://purge.jsdelivr.net/gh/Nextpertise/js-zipcode-check-plugin@latest/dist/js/app.css
+          fetch-depth: 0
+      - name: Fetch tags
+        shell: bash
+        run: git fetch --tags -f
+      - name: Autotag
+        uses: DanySK/semver-autotag-action@master
+      - name: Deploy
+        run: |
+          TAG=$(git describe --tags --exact-match HEAD)
+          hub release create -m "$(git tag -l --format='%(contents)' "$TAG")" "$TAG" || true
+          hub release edit -m '' -a a_file "$TAG"
